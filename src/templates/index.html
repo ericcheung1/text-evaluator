@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+    <title>Sentiment</title>
+</head>
+<body>
+    <h1>Enter Reddit URL!!</h1>
+    <form hx-post="/sentiment-api" hx-target="#result">
+        <p><input type="text" id="name" name="url" required></p>
+        <button type="submit">Submit</button>
+        <p id="result"></p>
+    </form>
+</body>
+</html>

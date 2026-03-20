@@ -17,12 +17,14 @@ def authenticate_reddit():
         client_id=client_id,
         client_secret=client_secret,
         user_agent="test_bot"
-        )
+    )
     
     print(f'Logged in as user: {reddit_instance.user.me()}')
     return reddit_instance
 
 def get_comments(reddit_instance, url):
+    """
+    """
     submission = reddit_instance.submission(url=url)
 
     submission.comments.replace_more(limit=5)
