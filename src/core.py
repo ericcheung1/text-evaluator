@@ -1,4 +1,5 @@
 import httpx
+import pandas as pd
 
 def format_payload(comments):
     """
@@ -16,13 +17,17 @@ def format_payload(comments):
 
     return payload
 
-def call_sentiment_endpoint(payload):
+def call_sentiment_endpoint(payload, sentiment_url):
     """
     """
-
-    # TODO: in call_sentiment_endpoint define api endpoint at client start-time
-    response = httpx.post("", json=payload)
-    # TODO: in call_sentiment_endpoint add error handling
+    
+    try:
+        response = httpx.post(sentiment_url, json=payload, timeout=60)
+    except httpx.ConnectError:
+        return {"error": "connection error"}
+    except httpx.TimeoutException:
+        return {"error": "timeout error"}
+    
     return response.json()
 
 def calculate_final_sentiment(response_json):
@@ -43,21 +48,28 @@ def calculate_final_sentiment(response_json):
 
     mean_conf = sentiment_confidence/len(response_json)
     return [{"sentiment_count": sentiment_count},
-            {"sentiment_confidence": round(mean_conf, 3)},
-            {"sentiment_results": response_json}]
+            {"sentiment_confidence": round(mean_conf, 3)}]
 
 
-def orchestrate_pipeline(comments):
+def orchestrate_pipeline(comments, sentiment_url):
     """
     """
     payload = format_payload(comments)
 
-    response = call_sentiment_endpoint(payload)
+    response = call_sentiment_endpoint(payload, sentiment_url)
 
+    # NOTE: final_result is sentiment count + averaged confidence
     final_result = calculate_final_sentiment(response)
 
-    return final_result
+    comments_table = pd.DataFrame(payload)
+    final_result_table = pd.DataFrame(response)
+
+    # NOTE: merged_results_table is of individual comment sentiment
+    merged_results_table = pd.merge(final_result_table, comments_table, 
+                              on="comment_id", how="left").to_html()
+
+    return final_result, merged_results_table
 
 if __name__ == "__main__":
-    result = orchestrate_pipeline("")
+    result = orchestrate_pipeline("", "")
     print(result)

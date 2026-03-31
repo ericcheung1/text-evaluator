@@ -1,3 +1,2 @@
 <div>Overall Result: {{overall_result}}</div>
-<div><pre>Individual Results: {{result| tojson(indent=4)}}</pre></div>
-<div><pre>Comments: {{comments | tojson(indent=4)}}</pre></div>
+<div>Comments: {{comments | safe}}</div>
