@@ -10,7 +10,7 @@ def format_payload(comments):
     texts = []
     for comment in comments:
         text_entry = {"text": comment["comment"], 
-                      "text_id": comment["user_id"]}
+                      "text_id": comment["comment_id"]}
         texts.append(text_entry)
 
     return {"texts": texts}

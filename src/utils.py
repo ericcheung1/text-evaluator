@@ -32,24 +32,29 @@ def get_comments(reddit_instance, url):
     except RedditAPIException:
         return {"error": "reddit api"}
 
+    # replace_more() method opens "MoreComments" objects
+    # limit parameter sets number of "MoreComments" to replace
     submission.comments.replace_more(limit=5)
     comment_queue = submission.comments[:5]
 
     count = 0
     comments = []
 
+    # BFS traversal of comment forest
     while comment_queue:
         comment = comment_queue.pop(0)
+        count+=1
+
+        if count >= 15:
+            break
+
         comments.append({
             "user_id": str(comment.author.id),
             "comment_id": str(comment.id),
             "comment": str(comment.body),
         })
-        count+=1
-        if count >= 15:
-            break
         comment_queue.extend(comment.replies)
-
+        
     return comments
 
 def connect_sentiment():
