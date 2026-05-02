@@ -23,6 +23,7 @@ def call_sentiment_endpoint(payload, sentiment_url):
     
     try:
         response = httpx.post(sentiment_url, json=payload, timeout=60)
+        print(response)
         if response.status_code == 404:
             return {"error": "incorrect api url"}
     except httpx.ConnectError:

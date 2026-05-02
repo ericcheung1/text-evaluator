@@ -2,7 +2,7 @@
 
 Early Prototype Live On: https://www.word-processor-dot-com.site/
 
-A lightweight frontend‑for‑backend (BFF) web application that serves as one client of the WPaaS NLP Inference API. The site currently supports real-time sentiment analysis of Reddit posts fetched via PRAW, using the sentiment endpoint of the [WPaaS](https://github.com/ericcheung1/WPaaS) API.
+A lightweight frontend‑for‑backend (BFF) web application that serves as one client of the WPaaS NLP Inference API. The site currently supports real-time sentiment analysis of Reddit posts fetched via PRAW, using the sentiment endpoint of the [WPaaS](https://github.com/ericcheung1/WPaaS) API. And supports sentiment analysis on individual sentences. 
 
 ## Architecture & Deployment
 

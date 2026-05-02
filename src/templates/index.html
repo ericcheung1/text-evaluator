@@ -2,14 +2,30 @@
 <html>
 <head>
     <script src="https://unpkg.com/htmx.org@2.0.0"></script>
-    <title>Sentiment</title>
+    <title>word-processor</title>
 </head>
 <body>
-    <h1>Enter Reddit URL!!</h1>
-    <form hx-post="/sentiment-api" hx-target="#result">
-        <p><input type="text" id="name" name="url" required></p>
-        <button type="submit">Submit</button>
+    <p>Welcome to word-processor-dot-com! This prototype web app was made as a client to the WPaaS API.</p>
+    <p>Currently this site support sentiment analysis of individual sentences.</p>
+    <p>
+        And it supports sentiment analysis on Reddit <strong>Posts</strong>.
+        More specifically it analyses up to 15 top level comments on a post.
+    </p>
+    
+    
+    <h2>Enter Text!!</h2>
+    <form hx-post="/sentiment-stand-alone" hx-target="#result">
+        <p><input type="text" id="name" name="text" required></p>
+        <button type="submit">Analyze Text</button>
         <p id="result"></p>
+    </form>
+
+    <h2>Enter Reddit Post URL!!</h2>
+    <p>Please make sure it is a specific post and not a full subreddit.</p>
+    <form hx-post="/sentiment-reddit" hx-target="#result1">
+        <p><input type="text" id="name" name="url" required></p>
+        <button type="submit">Analyse Reddit Post</button>
+        <p id="result1"></p>
     </form>
     <p>v0.0.1</p>
 </body>
