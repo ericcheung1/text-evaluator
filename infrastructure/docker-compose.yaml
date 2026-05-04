@@ -1,7 +1,7 @@
 services:
   wp-dot-com:
     image: ghcr.io/ericcheung1/wp-dot-com:main
-    exposes:
+    expose:
       - "8000"
     env_file: .env
     restart: unless-stopped
