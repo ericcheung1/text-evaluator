@@ -69,8 +69,8 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "docker-compose.yaml"
-          target: "~/wp-dot-com"
+          source: 'docker-compose.yaml'
+          target: '~/wp-dot-com'
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3
@@ -80,5 +80,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: | 
             cd ~/wp-dot-com
-            docker compose pull
-            docker compose up -d --remove-orphans
+            docker compose pull wp-dot-com
+            docker compose up -d --remove-orphans wp-dot-com
