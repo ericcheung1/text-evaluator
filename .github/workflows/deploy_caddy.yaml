@@ -1,4 +1,4 @@
-name: Deploy Nginx as Gateway
+name: Deploy Caddy as Reverse Proxy
 
 on:
   push:
@@ -33,21 +33,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd ~/wp-dot-com
-            docker compose pull nginx certbot
-            docker compose up -d --remove-orphans nginx certbot
-
-            if [ ! -d "./certbot/conf/live/word-processor-dot-com.site" ]; then
-                echo "No certs found — issuing initial certificate..."
-
-                docker compose run --rm certbot certonly \
-                    --webroot -w /var/www/certbot \
-                    -d word-processor-dot-com.site \
-                    -d www.word-processor-dot-com.site \
-                    --email ericcheun251@gmail.com \
-                    --agree-tos \
-                    --non-interactive
-
-                docker compose kill -s HUP nginx
-            else
-                echo "Certs already exist — skipping issuance."
-            fi
+            docker compose pull caddy
+            docker compose up -d --remove-orphans caddy
