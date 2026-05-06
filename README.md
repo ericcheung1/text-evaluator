@@ -6,10 +6,8 @@ A lightweight frontend‑for‑backend (BFF) web application that serves as one 
 
 ## Architecture & Deployment
 
-- Deployed on a VPS using Nginx as a static file server and TLS termination layer
-- Secured with HTTPS via Let’s Encrypt (Certbot) & Served through a custom domain
+- Deployed on a VPS using Caddy as a reverse proxy and TLS termination layer
 - Communicates directly with the WPaaS API over HTTP
-
 
 ## Current Limitations
 

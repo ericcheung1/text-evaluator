@@ -17,6 +17,7 @@ services:
       - caddy_config:/config
     depends_on:
       - wp-dot-com
+    restart: unless-stopped
 
 volumes:
   caddy_data:

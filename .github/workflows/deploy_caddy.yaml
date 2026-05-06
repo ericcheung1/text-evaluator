@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout nginx config and docker compose
+      - name: Checkout caddy config and docker compose
         uses: actions/checkout@v4
 
       - name: Copy config and compose to VPS
