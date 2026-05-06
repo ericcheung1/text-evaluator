@@ -69,9 +69,10 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: 'docker-compose.yaml'
+          source: 'infrastructure/'
           target: '~/wp-dot-com'
-
+          strip_components: 1
+          
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3
         with:
